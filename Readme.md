@@ -78,3 +78,37 @@
     "ReturnValues": "ALL_NEW"
 }
 ```
+
+## Create Table in DynamoDB
+* **Stage Method:** *POST* 
+### Integration Request
+* **HTTP Method:** *POST*
+* **Action:** *CreateTable*
+* **Mapping Templates:** *application/json*
+```
+{
+    "TableName" = "<Your-Table-Name>",
+    "BillingMode": "PAY_PER_REQUEST",//On-Demand
+    "AttributeDefinitions": [ 
+      { 
+         "AttributeName" = "<Your-PartitionKey>",
+         "AttributeType": "S" //Type: B, S, N
+      },
+      { 
+         "AttributeName" = "<Your-SortKey>",
+         "AttributeType": "S" //Type: B, S, N
+      }
+   ],
+    "KeySchema": [ 
+      { 
+         "AttributeName": "<Same as the PartitionKey you input above>",
+         "KeyType": "HASH" //"HASH" represent partition key
+      },
+      {
+         "AttributeName": "<Same as the SortKey you input above>",
+         "KeyType": "RANGE" //"RANGE" represent sort key
+      }
+   ] 
+}
+```
+> Type: B, S, N = Boolean, String, Number
